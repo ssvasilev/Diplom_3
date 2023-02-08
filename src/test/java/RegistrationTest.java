@@ -1,3 +1,4 @@
+import org.junit.After;
 import page_object.LoginPage;
 import page_object.RegisterPage;
 import Resources.UserAPI;
@@ -34,7 +35,7 @@ public class RegistrationTest {
     @Description("После успешного завершения, тестовый пользователь удаляется через API")
     public void registrationFlow() throws InterruptedException {
         MainPage mainPage = new MainPage(driver); //Создаём объект главной страницы
-        mainPage.LkButtonClick(); //Нажимаем на кнопку "Личный кабинет
+        mainPage.lkButtonClick(); //Нажимаем на кнопку "Личный кабинет
         LoginPage loginPage = new LoginPage(driver); //Создаём объект страницы логина
         loginPage.regLinkButtonClick(); //Нажимаем на слово "Зарегистрироваться"
         RegisterPage registerPage = new RegisterPage(driver); //Создаём объект страницы регистрации
@@ -56,7 +57,7 @@ public class RegistrationTest {
     @Description("Минимальное значение пароля - 6 символов")
     public void registrationFailWithShortPassword() throws InterruptedException {
         MainPage mainPage = new MainPage(driver); //Создаём объект главной страницы
-        mainPage.LkButtonClick(); //Нажимаем на кнопку "Личный кабинет
+        mainPage.lkButtonClick(); //Нажимаем на кнопку "Личный кабинет
         LoginPage loginPage = new LoginPage(driver); //Создаём объект страницы логина
         loginPage.regLinkButtonClick(); //Нажимаем на слово "Зарегистрироваться"
         RegisterPage registerPage = new RegisterPage(driver); //Создаём объект страницы регистрации
@@ -69,4 +70,9 @@ public class RegistrationTest {
 
     }
 
+    @After
+    public void tearDown() {
+        // Закрой браузер
+        driver.quit();
+    }
 }

@@ -1,20 +1,35 @@
 package Resources;
 
+import io.qameta.allure.Step;
+import io.restassured.response.Response;
+
 import static io.restassured.RestAssured.given;
 
 
 public class UserAPI {
 
-    ;
-
+    private final static String USER_REGISTER_ENDPOINT = "https://stellarburgers.nomoreparties.site/api/auth/register/";
     private final static String USER_LOGIN_ENDPOINT = "https://stellarburgers.nomoreparties.site/api/auth/login/";
     private final static String USER_ENDPOINT = "https://stellarburgers.nomoreparties.site/api/auth/user/";
+
+
+    //Создание Пользователя
+    @Step("Отправляем POST-запрос создания пользователя")
+    public static Response createUser(String email, String name, String password) {
+        User user = new User(email,name, password);
+        Response response =
+                given()
+                        .header("Content-type", "application/json")
+                        .body(user)
+                        .post(USER_REGISTER_ENDPOINT);
+        return  response;
+    }
 
     public static String loginUserAccessToken(String email, String password) {
         User user = new User(email, password);
         UserToken userResponce =
                 //Логин курьером, что бы получить его id
-                given().log().all()
+                given()
                         .header("Content-type", "application/json")
                         .body(user)
                         .post(USER_LOGIN_ENDPOINT)

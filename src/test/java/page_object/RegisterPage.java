@@ -15,29 +15,38 @@ public class RegisterPage {
     }
 
     //Поле "Имя" на панели "Регистрация"
-    private By NameRegField = By.xpath(".//label[contains(text(),'Имя')]/../input");
+    private By nameRegField = By.xpath(".//label[contains(text(),'Имя')]/../input");
 
-    //Поле "Имя" на панели "Регистрация"
-    private By EmailRegField = By.xpath(".//label[contains(text(),'Email')]/../input");
+    //Поле "Email" на панели "Регистрация"
+    private By emailRegField = By.xpath(".//label[contains(text(),'Email')]/../input");
 
-    //Поле "Имя" на панели "Регистрация"
-    private By PasswordRegField = By.xpath(".//label[contains(text(),'Пароль')]/../input");
+    //Поле "Пароль" на панели "Регистрация"
+    private By passwordRegField = By.xpath(".//label[contains(text(),'Пароль')]/../input");
 
     //Кнопка "Заргистрироваться" на панели "Регистрация"
-    private By RegButton = By.xpath(".//button[contains(text(),'Зарегистрироваться')]");
+    private By regButton = By.xpath(".//button[contains(text(),'Зарегистрироваться')]");
 
+    //Кнопка "Войти" на странице регистрации
+    private By logButton = By.xpath(".//a[contains(text(),'Войти')]");
     
     //Метод заполнения полей
     public void  setRegisterField(String nameSet, String emailSet, String password) {
-        driver.findElement(NameRegField).sendKeys(nameSet); //Введи имя
-        driver.findElement(EmailRegField).sendKeys(emailSet); //Введи Email
-        driver.findElement(PasswordRegField).sendKeys(password); //Введи пароль
+        driver.findElement(nameRegField).sendKeys(nameSet); //Введи имя
+        driver.findElement(emailRegField).sendKeys(emailSet); //Введи Email
+        driver.findElement(passwordRegField).sendKeys(password); //Введи пароль
     }
 
     public void  regButtonClick(){
-        WebElement element = driver.findElement(RegButton); //Найди элемент
+        WebElement element = driver.findElement(regButton); //Найди элемент
         ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element); //Проскроль до него
-        Assert.assertTrue(driver.findElement(RegButton).isEnabled()); //Убедись, что он доступен
-        driver.findElement(RegButton).click(); //Нажми на элемент
+        Assert.assertTrue(driver.findElement(regButton).isEnabled()); //Убедись, что он доступен
+        driver.findElement(regButton).click(); //Нажми на элемент
+    }
+
+    public void  logButtonClick(){
+        WebElement element = driver.findElement(logButton); //Найди элемент
+        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element); //Проскроль до него
+        Assert.assertTrue(driver.findElement(logButton).isEnabled()); //Убедись, что он доступен
+        driver.findElement(logButton).click(); //Нажми на элемент
     }
 }

@@ -14,17 +14,25 @@ public class MainPage {
         this.driver = driver;
     }
 
-    //Кнопка личного кабинета
-    private By LkButton = By.xpath(".//p[contains(text(),'Личный Кабинет')]"); //Локатор кнопки "Личный кабинет
+    private By lkButton = By.xpath(".//p[contains(text(),'Личный Кабинет')]"); //Локатор кнопки "Личный кабинет
 
-    public void LkButtonClick() {
-        WebElement element = driver.findElement(LkButton); //Найди элемент
+    private By loginButtonMainPage = By.xpath(".//button[contains(text(),'Войти в аккаунт')]");
+
+    private By orderButton = By.xpath(".//button[contains(text(),'Оформить заказ')]");
+
+    public void lkButtonClick() {
+        WebElement element = driver.findElement(lkButton); //Найди элемент
         ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element); //Проскроль до него
-        Assert.assertTrue(driver.findElement(LkButton).isEnabled()); //Убедись, что он доступен
-        driver.findElement(LkButton).click(); //Нажми на элемент
+        Assert.assertTrue(driver.findElement(lkButton).isEnabled()); //Убедись, что он доступен
+        driver.findElement(lkButton).click(); //Нажми на элемент
     }
 
-
+    public void loginButtonMainPageClick(){
+        WebElement element = driver.findElement(loginButtonMainPage); //Найди элемент
+        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element); //Проскроль до него
+        Assert.assertTrue(driver.findElement(loginButtonMainPage).isEnabled()); //Убедись, что он доступен
+        driver.findElement(loginButtonMainPage).click(); //Нажми на элемент
+    }
 
 
 
