@@ -20,6 +20,16 @@ public class MainPage {
 
     private By orderButton = By.xpath(".//button[contains(text(),'Оформить заказ')]");
 
+    //Кнопка секции "Булки"
+    private By sectionBunButton = By.xpath(".//span[contains(text(),'Булки')]");
+
+    //Кнопка секции "Соусы"
+    private By sectionSauceButton = By.xpath(".//span[contains(text(),'Соусы')]");
+
+    //Кнопка секции "Начинки"
+    private By sectionIngredientsButton = By.xpath(".//span[contains(text(),'Начинки')]");
+
+
     public void lkButtonClick() {
         WebElement element = driver.findElement(lkButton); //Найди элемент
         ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element); //Проскроль до него
@@ -34,13 +44,26 @@ public class MainPage {
         driver.findElement(loginButtonMainPage).click(); //Нажми на элемент
     }
 
+    public void sectionBunButtonClick(){
+        WebElement element = driver.findElement(sectionBunButton); //Найди элемент
+        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element); //Проскроль до него
+        Assert.assertTrue(driver.findElement(sectionBunButton).isEnabled()); //Убедись, что он доступен
+        driver.findElement(sectionBunButton).click(); //Нажми на элемент
+    }
 
+    public void sectionSauceButtonClick(){
+        WebElement element = driver.findElement(sectionSauceButton); //Найди элемент
+        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element); //Проскроль до него
+        Assert.assertTrue(driver.findElement(sectionSauceButton).isEnabled()); //Убедись, что он доступен
+        driver.findElement(sectionSauceButton).click(); //Нажми на элемент
+    }
 
-    //private By OrderHeadButton = By.className("Button_Button__ra12g"); //Локатор кнопки "Заказать" в шапке
-
-    //private By OrderMiddleButton =  By.xpath(".//button[@class ='Button_Button__ra12g Button_Middle__1CSJM']"); //Локатор кнопки "Заказать №2"
-
-
+    public void sectionIngredientsButtonClick(){
+        WebElement element = driver.findElement(sectionIngredientsButton); //Найди элемент
+        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element); //Проскроль до него
+        Assert.assertTrue(driver.findElement(sectionIngredientsButton).isEnabled()); //Убедись, что он доступен
+        driver.findElement(sectionIngredientsButton).click(); //Нажми на элемент
+    }
 
 
 }
