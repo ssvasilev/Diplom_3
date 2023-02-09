@@ -32,8 +32,6 @@ public class LoginPage {
     private By forgotPasswordButton = By.xpath(".//a[contains(text(),'Восстановить пароль')]");
 
 
-    //public static By loingTitle = By.xpath(".//div[@class='Auth_login__3hAey']/h2");
-
     public void regLinkButtonClick() {
         WebElement element = driver.findElement(regLinkButton); //Найди элемент
         ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element); //Проскроль до него

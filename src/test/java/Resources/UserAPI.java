@@ -8,6 +8,11 @@ import static io.restassured.RestAssured.given;
 
 public class UserAPI {
 
+    public static String testUserEmail = "autotestvasilevss@yandex.ru";
+    public static String testUserPassword = "q1w2e3r4t5";
+    public static String testUserName = "Сергей";
+
+
     private final static String USER_REGISTER_ENDPOINT = "https://stellarburgers.nomoreparties.site/api/auth/register/";
     private final static String USER_LOGIN_ENDPOINT = "https://stellarburgers.nomoreparties.site/api/auth/login/";
     private final static String USER_ENDPOINT = "https://stellarburgers.nomoreparties.site/api/auth/user/";

@@ -1,14 +1,11 @@
+import Resources.InitializeDriver;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import Resources.UserAPI;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import page_object.ForgotPasswordPage;
@@ -16,21 +13,15 @@ import page_object.LoginPage;
 import page_object.MainPage;
 import page_object.RegisterPage;
 
-public class LoginTest {
+import static org.openqa.selenium.By.xpath;
 
-    private WebDriver driver;
+public class LoginTest extends  InitializeDriver{
 
     @Before
     public void initialize() {
 
         //Создаём тестового пользователя
-        UserAPI.createUser("autotestvasilevss@yandex.ru", "Сергей", "q1w2e3r4t5");
-        // создаём драйвер для браузера Chrome
-        ChromeOptions options = new ChromeOptions();
-        //options.addArguments("--no-sandbox", "--headless", "--disable-dev-shm-usage");
-        driver = new ChromeDriver(options);
-        // переходим на страницу тестового приложения
-        driver.get("https://stellarburgers.nomoreparties.site/");
+        UserAPI.createUser(UserAPI.testUserEmail, UserAPI.testUserName, UserAPI.testUserPassword);
     }
 
     @Test
@@ -39,13 +30,12 @@ public class LoginTest {
         MainPage mainPage = new MainPage(driver); //Создаём объект главной страницы
         mainPage.loginButtonMainPageClick();
         LoginPage loginPage = new LoginPage(driver); //Создаём объект страницы логина
-        loginPage.setLoginField("autotestvasilevss@yandex.ru","q1w2e3r4t5"); //Заполняем поля
+        loginPage.setLoginField(UserAPI.testUserEmail,UserAPI.testUserPassword); //Заполняем поля
         loginPage.loginButtonClick();
         //После успешного логина должно перенести на главную страницу и появиться кнопка "Оформить заказ"
         WebElement dynamicElement = (new WebDriverWait(driver, 10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//button[contains(text(),'Оформить заказ')]")));
-        //Сравниваем текущий URL с адресом главной страницы
-        Assert.assertEquals("https://stellarburgers.nomoreparties.site/",driver.getCurrentUrl());
+                .until(ExpectedConditions.presenceOfElementLocated(xpath(".//button[contains(text(),'Оформить заказ')]")));
+        Assert.assertTrue(driver.findElement(xpath(".//button[contains(text(),'Оформить заказ')]")).isEnabled()); //Убедись, что кнопка доступна
     }
 
     @Test
@@ -54,13 +44,12 @@ public class LoginTest {
         MainPage mainPage = new MainPage(driver); //Создаём объект главной страницы
         mainPage.lkButtonClick();
         LoginPage loginPage = new LoginPage(driver); //Создаём объект страницы логина
-        loginPage.setLoginField("autotestvasilevss@yandex.ru","q1w2e3r4t5"); //Заполняем поля
+        loginPage.setLoginField(UserAPI.testUserEmail,UserAPI.testUserPassword); //Заполняем поля
         loginPage.loginButtonClick();
         //После успешного логина должно перенести на главную страницу и появиться кнопка "Оформить заказ"
         WebElement dynamicElement = (new WebDriverWait(driver, 10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//button[contains(text(),'Оформить заказ')]")));
-        //Сравниваем текущий URL с адресом главной страницы
-        Assert.assertEquals("https://stellarburgers.nomoreparties.site/",driver.getCurrentUrl());
+                .until(ExpectedConditions.presenceOfElementLocated(xpath(".//button[contains(text(),'Оформить заказ')]")));
+        Assert.assertTrue(driver.findElement(xpath(".//button[contains(text(),'Оформить заказ')]")).isEnabled()); //Убедись, что кнопка доступна
     }
 
     @Test
@@ -72,13 +61,12 @@ public class LoginTest {
         loginPage.regLinkButtonClick(); //Нажимаем на слово "Зарегистрироваться"
         RegisterPage registerPage = new RegisterPage(driver); //Создаём объект страницы регистрации
         registerPage.logButtonClick();
-        loginPage.setLoginField("autotestvasilevss@yandex.ru","q1w2e3r4t5"); //Заполняем поля
+        loginPage.setLoginField(UserAPI.testUserEmail,UserAPI.testUserPassword); //Заполняем поля
         loginPage.loginButtonClick();
         //После успешного логина должно перенести на главную страницу и появиться кнопка "Оформить заказ"
         WebElement dynamicElement = (new WebDriverWait(driver, 10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//button[contains(text(),'Оформить заказ')]")));
-        //Сравниваем текущий URL с адресом главной страницы
-        Assert.assertEquals("https://stellarburgers.nomoreparties.site/",driver.getCurrentUrl());
+                .until(ExpectedConditions.presenceOfElementLocated(xpath(".//button[contains(text(),'Оформить заказ')]")));
+        Assert.assertTrue(driver.findElement(xpath(".//button[contains(text(),'Оформить заказ')]")).isEnabled()); //Убедись, что кнопка доступна
     }
 
     @Test
@@ -90,13 +78,12 @@ public class LoginTest {
         loginPage.forgotPasswordButtonClick(); //Нажимаем на кнопку "Всстановить пароль"
         ForgotPasswordPage forgotPasswordPage = new ForgotPasswordPage(driver); //Создаём объект страницы восстновления пароля
         forgotPasswordPage.LoginButtonClick(); //Нажимаем на кнопку "Войти"
-        loginPage.setLoginField("autotestvasilevss@yandex.ru","q1w2e3r4t5"); //Заполняем поля
+        loginPage.setLoginField(UserAPI.testUserEmail,UserAPI.testUserPassword); //Заполняем поля
         loginPage.loginButtonClick();
         //После успешного логина должно перенести на главную страницу и появиться кнопка "Оформить заказ"
         WebElement dynamicElement = (new WebDriverWait(driver, 10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//button[contains(text(),'Оформить заказ')]")));
-        //Сравниваем текущий URL с адресом главной страницы
-        Assert.assertEquals("https://stellarburgers.nomoreparties.site/",driver.getCurrentUrl());
+                .until(ExpectedConditions.presenceOfElementLocated(xpath(".//button[contains(text(),'Оформить заказ')]")));
+        Assert.assertTrue(driver.findElement(xpath(".//button[contains(text(),'Оформить заказ')]")).isEnabled()); //Убедись, что кнопка доступна
     }
 
      @After
@@ -104,7 +91,7 @@ public class LoginTest {
         // Закрой браузер
         driver.quit();
         //Удали тестового пользователя
-        UserAPI.deleteUser("autotestvasilevss@yandex.ru","q1w2e3r4t5");
+        UserAPI.deleteUser(UserAPI.testUserEmail,UserAPI.testUserPassword);
     }
 
 }

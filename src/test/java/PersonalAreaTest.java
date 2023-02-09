@@ -1,3 +1,4 @@
+import Resources.InitializeDriver;
 import Resources.UserAPI;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
@@ -5,35 +6,25 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import page_object.LoginPage;
 import page_object.MainPage;
 import page_object.ProfilePage;
 
-public class PersonalAreaTest {
+public class PersonalAreaTest extends InitializeDriver {
 
-    private WebDriver driver;
 
     @Before
     public void initialize() {
 
         //Создаём тестового пользователя
-        UserAPI.createUser("autotestvasilevss@yandex.ru", "Сергей", "q1w2e3r4t5");
-        // создаём драйвер для браузера Chrome
-        ChromeOptions options = new ChromeOptions();
-        //options.addArguments("--no-sandbox", "--headless", "--disable-dev-shm-usage");
-        driver = new ChromeDriver(options);
-        // переходим на страницу тестового приложения
-        driver.get("https://stellarburgers.nomoreparties.site/");
+        UserAPI.createUser(UserAPI.testUserEmail, UserAPI.testUserName, UserAPI.testUserPassword);
         MainPage mainPage = new MainPage(driver); //Создаём объект главной страницы
         mainPage.lkButtonClick();
         LoginPage loginPage = new LoginPage(driver); //Создаём объект страницы логина
-        loginPage.setLoginField("autotestvasilevss@yandex.ru","q1w2e3r4t5"); //Заполняем поля
+        loginPage.setLoginField(UserAPI.testUserEmail,UserAPI.testUserPassword); //Заполняем поля
         loginPage.loginButtonClick();
 
 
@@ -96,7 +87,7 @@ public class PersonalAreaTest {
         // Закрой браузер
         driver.quit();
         //Удали тестового пользователя
-        UserAPI.deleteUser("autotestvasilevss@yandex.ru","q1w2e3r4t5");
+        UserAPI.deleteUser(UserAPI.testUserEmail,UserAPI.testUserPassword);
     }
 
 }

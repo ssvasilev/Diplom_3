@@ -1,29 +1,22 @@
+import Resources.InitializeDriver;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import page_object.MainPage;
 
-public class SectionsTest {
+import static org.openqa.selenium.By.xpath;
 
-    private WebDriver driver;
+public class SectionsTest extends InitializeDriver {
 
-    @Before
-    public void initialize() {
-        // создаём драйвер для браузера Chrome
-        ChromeOptions options = new ChromeOptions();
-        //options.addArguments("--no-sandbox", "--headless", "--disable-dev-shm-usage");
-        driver = new ChromeDriver(options);
-        // переходим на страницу тестового приложения
-        driver.get("https://stellarburgers.nomoreparties.site/");
-    }
+    private String xpathBun = "//div[@class='tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 pb-4 pl-10 noselect']/span[contains(text(),'Булки')]";
+    private String xpathSauce = "//div[@class='tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 pb-4 pl-10 noselect']/span[contains(text(),'Соусы')]";
+    private String xpathIngredients = "//div[@class='tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 pb-4 pl-10 noselect']/span[contains(text(),'Начинки')]";
+
 
     @Test
     @DisplayName("Переход к разделу Булки")
@@ -33,7 +26,8 @@ public class SectionsTest {
         mainPage.sectionBunButtonClick(); //Нажимаем на кнопку "Булки"
         //Ждём, пока появится раздел Булки
         WebElement dynamicElement = (new WebDriverWait(driver, 10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//h2[contains(text(),'Булки')]")));
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpathBun)));
+        Assert.assertTrue(driver.findElement(xpath(xpathBun)).isEnabled()); //Убедись, что элемент доступен
     }
 
     @Test
@@ -41,9 +35,10 @@ public class SectionsTest {
     public void sectionSauce(){
         MainPage mainPage = new MainPage(driver); //Создаём объект главной страницы
         mainPage.sectionSauceButtonClick(); //Нажимаем на кнопку "Соусы"
-        //Ждём, пока появится раздел Соусы
+        //Ждём, пока появится раздел Булки
         WebElement dynamicElement = (new WebDriverWait(driver, 10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//h2[contains(text(),'Булки')]")));
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpathSauce)));
+        Assert.assertTrue(driver.findElement(xpath(xpathSauce)).isEnabled()); //Убедись, что элемент доступен
     }
 
     @Test
@@ -51,9 +46,10 @@ public class SectionsTest {
     public void sectionIngredients(){
         MainPage mainPage = new MainPage(driver); //Создаём объект главной страницы
         mainPage.sectionIngredientsButtonClick(); //Нажимаем на кнопку "Начинки"
-        //Ждём, пока появится раздел начинки
+        //Ждём, пока появится раздел Булки
         WebElement dynamicElement = (new WebDriverWait(driver, 10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//h2[contains(text(),'Булки')]")));
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpathIngredients)));
+        Assert.assertTrue(driver.findElement(xpath(xpathIngredients)).isEnabled()); //Убедись, что элемент доступен
     }
 
     @After
