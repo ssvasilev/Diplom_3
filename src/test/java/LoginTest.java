@@ -11,7 +11,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import page_object.ForgotPassword;
+import page_object.ForgotPasswordPage;
 import page_object.LoginPage;
 import page_object.MainPage;
 import page_object.RegisterPage;
@@ -88,8 +88,8 @@ public class LoginTest {
         mainPage.lkButtonClick(); //Нажимаем на кнопку "Личный кабинет
         LoginPage loginPage = new LoginPage(driver); //Создаём объект страницы логина
         loginPage.forgotPasswordButtonClick(); //Нажимаем на кнопку "Всстановить пароль"
-        ForgotPassword forgotPassword = new ForgotPassword(driver); //Создаём объект страницы восстновления пароля
-        forgotPassword.LoginButtonClick(); //Нажимаем на кнопку "Войти"
+        ForgotPasswordPage forgotPasswordPage = new ForgotPasswordPage(driver); //Создаём объект страницы восстновления пароля
+        forgotPasswordPage.LoginButtonClick(); //Нажимаем на кнопку "Войти"
         loginPage.setLoginField("autotestvasilevss@yandex.ru","q1w2e3r4t5"); //Заполняем поля
         loginPage.loginButtonClick();
         //После успешного логина должно перенести на главную страницу и появиться кнопка "Оформить заказ"

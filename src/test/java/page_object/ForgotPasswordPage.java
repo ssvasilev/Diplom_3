@@ -6,11 +6,11 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class ForgotPassword {
+public class ForgotPasswordPage {
 
     private static WebDriver driver;
 
-    public ForgotPassword(WebDriver driver) {
+    public ForgotPasswordPage(WebDriver driver) {
         this.driver = driver;
     }
 
